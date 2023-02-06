@@ -9,11 +9,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <form action="{{ route('posts.update', $post) }}" method="PUT">
+                    <form action="{{ route('posts.update', $post) }}" method="POST">
+                    	
+                    	@method('PUT')
+                    	@include('posts._form')
 
-                      @method('PUT')
-                      @include('posts._form')
-                      
                     </form>
                 </div>
             </div>
