@@ -12,6 +12,12 @@
     <a href="{{ route('blog') }}">Blog</a>
   </p>
 
+  @auth
+    <a href="{{ route('dashboard') }}">Dashboard</a>
+  @else
+    <a href="{{ route('login') }}">Login</a>
+  @endauth
+
   @yield('content')
 </body>
 </html>
