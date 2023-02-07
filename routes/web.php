@@ -21,18 +21,16 @@ Route::controller(PageController::class)->group(function() {
     Route::get('blog/{post:slug}', 'post')->name('post');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::redirect('/dashboard', 'posts')->name('dashboard');
+
+// except(['show']) -> Work with evertything except Show view
+// To check route ist avaiables -> php artisan route:list
+Route::resource('posts', PostController::class)->middleware(['auth', 'verified'])->except(['show']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    // except(['show']) -> Work with evertything except Show view
-    // To check route ist avaiables -> php artisan route:list
-    Route::resource('posts', PostController::class)->except(['show']);
 });
 
 require __DIR__.'/auth.php';
